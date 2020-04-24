@@ -1,10 +1,18 @@
+const Appartement = require("../models/Appartement");
+
 /***** Controlleur Appartement *****/
 
 const controllerAppartement = {
   dataAppartement: (req, res) => {
-    res.send("Controller GET dataAppartement");
-    console.log("GET dataAppartement");
+    Appartement.find({}, (err, data) => {
+      if (err) {
+        res.status(500).json({});
+        return;
+      }
+      res.json(data);
+    });
   },
+
   dataAppartementDetails: (req, res) => {
     res.send("Controller GET dataAppartementDetails");
     console.log("GET dataAppartementDetails");

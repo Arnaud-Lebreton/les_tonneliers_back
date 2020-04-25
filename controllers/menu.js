@@ -1,13 +1,31 @@
+const Clients = require("../models/Clients");
+
 /***** Controlleur Menu *****/
 
 const controllerMenu = {
-  dataMenu: (req, res) => {
-    res.send("Controller GET dataMenu");
-    console.log("GET dataMenu");
-  },
   dataContact: (req, res) => {
-    res.send("Controller POST dataContact");
-    console.log("POST dataContact");
+    let form = {
+      nom: "LEBRETON",
+      prenom: "Arnaud",
+      email: "arnolebreton@gmail.com",
+      tel: "0760406549",
+      message: "Ceci est un test",
+    };
+    const contact = new Clients({
+      nom: form.nom,
+      prenom: form.prenom,
+      email: form.email,
+      tel: form.tel,
+      message: form.message,
+    });
+    contact.save((err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("Erreur, veuillez réessayer");
+        return;
+      }
+      res.status(200).send("Votre message a été transmis à nos équipes");
+    });
   },
 };
 

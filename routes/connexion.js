@@ -2,12 +2,13 @@ const express = require("express");
 const routerConnexion = express.Router();
 const controllerConnexion = require("../controllers/connexion");
 
-routerConnexion.get("/", controllerConnexion.dataConnexion);
-
-routerConnexion.post("/", controllerConnexion.dataConnexionForm);
-
+// Envoie mail+mdp pour connexion
+routerConnexion.post("/", controllerConnexion.dataConnexion);
+// Envoie formulaire de message
+routerConnexion.post("/formulaire", controllerConnexion.dataConnexionForm);
+// Envoie formulaire d'inscription
 routerConnexion.post("/inscription", controllerConnexion.dataInscription);
-
-routerConnexion.post("/mdp", controllerConnexion.dataMdp);
+// Envoie formulaire de changement de mot de passe
+routerConnexion.put("/mdp", controllerConnexion.dataMdp);
 
 module.exports = routerConnexion;

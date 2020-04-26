@@ -1,3 +1,7 @@
+/*
+ * Models - Appartements
+ */
+
 const mongoose = require("mongoose");
 
 const SchemaDateIndispo = new mongoose.Schema({

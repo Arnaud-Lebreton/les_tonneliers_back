@@ -1,3 +1,7 @@
+/*
+ * Models - clients
+ */
+
 const mongoose = require("mongoose");
 
 const SchemaReservation = mongoose.Schema({

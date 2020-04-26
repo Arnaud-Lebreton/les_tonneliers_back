@@ -3,10 +3,26 @@ const Clients = require("../models/Clients");
 
 /***** Controlleur Reservation *****/
 
+/*** Récapitulatif demande de Réservation clients /GET/ ***/
+
 const controllerReservation = {
   dataReservationApp: (req, res) => {
-    res.send("Controller GET dataReservation");
-    console.log("GET dataReservation");
+    Appartement.find({ nomApp: "Le Corton Charlemagne" }, (err, data) => {
+      if (err) {
+        res.status(500).json({});
+        return;
+      }
+      let dataTable = [];
+      for (let i = 0; i < data.length; i++) {
+        let liste = {
+          nomApp: data[i].nomApp,
+          prixNuit: data[i].prixNuit,
+          dateIndisp: data[i].dateIndisp,
+        };
+        dataTable.push(liste);
+      }
+      res.json(dataTable);
+    });
   },
 
   /*** Enregistre la demande de Réservation clients /POST/ ***/
@@ -55,7 +71,7 @@ const controllerReservation = {
     res.json("Récapitulatif Effectué");
   },
 
-/***  */
+  /***  */
   dataConfirmationRestantDu: (req, res) => {
     res.send("Controller PUT dataConfirmationRestantDu");
     console.log("PUT dataConfirmationRestantDu");

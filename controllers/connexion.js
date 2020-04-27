@@ -6,29 +6,20 @@
 const Clients = require("../models/Clients");
 
 const controllerConnexion = {
-  // Connexion : Recherche si client enregistré (avec filtre mail, mdp)
+  // Connexion : Recherche si client enregistré (avec filtre mail)
   dataConnexion: (req, res) => {
-    let recherche = { email: "eddy.mercier@gmail.com", mdp: "mdpEddy" };
-    Clients.find({}, (err, data) => {
+    let mail = "edd.mercier@gmail.com"; //req.query.email; //récupérer la variable depuis le front
+    let mdp = "mdpEddyModif"; //req.query.mdp;
+    Clients.find({ email: mail, mdp: mdp }, "_id email", (err, data) => {
       if (err) {
         res.status(500).json({});
         return;
       }
-      let message;
-      for (let i = 0; i < data.length; i++) {
-        if (recherche.email == data[i].email) {
-          if (recherche.mdp == data[i].mdp) {
-            message = "Validation de la connexion";
-          } else {
-            message = "Le mot de passe erroné";
-          }
-        } else {
-          message = "Vous n'avez pas de compte, veuillez vous inscrire";
-        }
-      }
-      res.json(message);
+      res.json(data);
+      //res.send("Connexion ok");
     });
   },
+
   // Connexion : Enregistre le formulaire message
   dataConnexionForm: (req, res) => {
     let donneeRecu = {

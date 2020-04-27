@@ -3,7 +3,7 @@ const routerConnexion = express.Router();
 const controllerConnexion = require("../controllers/connexion");
 
 // Envoie mail+mdp pour connexion
-routerConnexion.post("/", controllerConnexion.dataConnexion);
+routerConnexion.get("/", controllerConnexion.dataConnexion);
 // Envoie formulaire de message
 routerConnexion.post("/formulaire", controllerConnexion.dataConnexionForm);
 // Envoie formulaire d'inscription

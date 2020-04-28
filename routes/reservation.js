@@ -4,11 +4,13 @@ const controllerReservation = require("../controllers/reservation");
 
 routerReservation.get("/", controllerReservation.dataReservationApp);
 
-routerReservation.post("/", controllerReservation.dataReservationClients);
+routerReservation.get("/frais", controllerReservation.dataReservationFrais);
 
-routerReservation.post("/confirmation", controllerReservation.dataConfirmationClients);
+routerReservation.put("/", controllerReservation.dataReservationClients);
 
-routerReservation.put("/confirmation", controllerReservation.dataConfirmationRestantDu);
-
+routerReservation.get(
+  "/confirmation",
+  controllerReservation.dataConfirmationClients
+);
 
 module.exports = routerReservation;

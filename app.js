@@ -10,7 +10,6 @@ const cors = require("./middlewares/cors");
 /***** Constantes Routeurs *****/
 const connexion = require("./routes/connexion");
 const appartement = require("./routes/appartement");
-const menu = require("./routes/menu");
 const reservation = require("./routes/reservation");
 
 const app = express();
@@ -25,7 +24,6 @@ app.use(cors.handle);
 /***** Lancement des Routeurs *****/
 app.use("/connexion", connexion);
 app.use("/appartement", appartement);
-app.use("/menu", menu);
 app.use("/reservation", reservation);
 
 module.exports = app;

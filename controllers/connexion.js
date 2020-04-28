@@ -1,36 +1,29 @@
 /*
  * Controlleur Connexion
+ * A faire relier avec le front + les modals
  */
 
 //Import
 const Clients = require("../models/Clients");
 
 const controllerConnexion = {
-  // Connexion : Recherche si client enregistré (avec filtre mail)
+  // Connexion : Recherche dans collection Clients si mail + mdp existant GET //
   dataConnexion: (req, res) => {
-    let mail = "edd.mercier@gmail.com"; //req.query.email; //récupérer la variable depuis le front
-    let mdp = "mdpEddyModif"; //req.query.mdp;
-    Clients.find({ email: mail, mdp: mdp }, "_id email", (err, data) => {
+    let mail = req.body.email; //récupérer la variable depuis le front
+    let mdp = req.body.mdp;
+    Clients.findOne({ email: mail, mdp: mdp }, "_id email", (err, data) => {
       if (err) {
         res.status(500).json({});
         return;
       }
-      res.json(data);
-      //res.send("Connexion ok");
+      res.json("Connexion client OK");
     });
   },
 
-  // Connexion : Enregistre le formulaire message
+  // Connexion : Enregistre le formulaire message dans la collection Client POST //
   dataConnexionForm: (req, res) => {
-    let donneeRecu = {
-      nom: "MERCIER",
-      prenom: "Eddy",
-      email: "eddy.mercier@gmail.com",
-      tel: "06 50 11 15 85",
-      mdp: "mdpEddy",
-      message: "message d'Eddy",
-    };
-
+    let donneeRecu = req.body; //Récupération du body
+    console.log(donneeRecu);
     Clients.insertMany(donneeRecu, (err, res) => {
       if (err) {
         res.status(500).json({});
@@ -40,16 +33,10 @@ const controllerConnexion = {
     res.json("Le massage a été enregisté");
   },
 
-  // Connexion : Enregistre le formulaire d'inscription
+  // Connexion : Enregistre le formulaire d'inscription dans la collection Client POST //
   dataInscription: (req, res) => {
-    let donneeRecu = {
-      nom: "SOTIRIO",
-      prenom: "Carole",
-      email: "carole.sotirio@gmail.com",
-      tel: "06 50 11 15 85",
-      mdp: "mdpCarole",
-    };
-    Clients.insertMany(donneeRecu, (err, res) => {
+    let formulaireInscription = req.query.body; //récupérer les données du formilaire
+    Clients.insertMany(formulaireInscription, (err, res) => {
       if (err) {
         res.status(500).json({});
         return;
@@ -58,22 +45,16 @@ const controllerConnexion = {
     res.json("Votre inscription a été enregisté");
   },
 
-  // Connexion : Modification du mot de passe
+  // Connexion : Modification du mot de passe dans la collection Client PUT //
   dataMdp: (req, res) => {
-    let donneeRecu = {
-      email: "eddy.mercier@gmail.com",
-      mdp: "mdpEddyModif",
-    };
-    Clients.updateOne(
-      { email: donneeRecu.email },
-      { mdp: donneeRecu.mdp },
-      (err) => {
-        if (err) {
-          res.status(500).json({});
-          return;
-        }
+    let mail = req.query.email; //récupérer la variable depuis le front
+    let mdp = req.query.mdp;
+    Clients.updateOne({ email: mail }, { mdp: mdp }, (err) => {
+      if (err) {
+        res.status(500).json({});
+        return;
       }
-    );
+    });
     res.json("Votre mot de passe a été enregisté");
   },
 };

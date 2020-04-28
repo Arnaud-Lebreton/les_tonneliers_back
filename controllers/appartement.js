@@ -5,8 +5,9 @@
 //Import
 const Appartement = require("../models/Appartement");
 
+//
 const controllerAppartement = {
-  // Page 1 : Récupération info appartement (sans filtre)
+  // Page 1 : Récupération infos collection Appartement  (sans filtre) - GET //
   dataAppartement: (req, res) => {
     Appartement.find(
       {},
@@ -21,11 +22,10 @@ const controllerAppartement = {
     );
   },
 
-  // Page 2 : Récupération info appartement (avec filtre de recherche sur l'Id)
+  // Page 2 : Récupération info  collection Appartement (avec filtre de recherche sur l'Id) - GET //
   dataAppartementDetails: (req, res) => {
-    let recherche = req.query.id; //récupérer la variable depuis le front
-    console.log(recherche);
-    Appartement.findOne({ _id: recherche }, (err, data) => {
+    let idApp = req.query.id;
+    Appartement.findOne({ _id: idApp }, (err, data) => {
       if (err) {
         res.status(500).json({});
         return;
@@ -34,9 +34,9 @@ const controllerAppartement = {
     });
   },
 
-  // Page 2 : Récupération info NomApp/img (sans filtre)
+  // Page 2 : Récupération info  collection Appartement NomApp/img (sans filtre) - GET //
   dataAppartementAutres: (req, res) => {
-    Appartement.find({}, (err, data) => {
+    Appartement.find({}, "_id nomApp imgApp", (err, data) => {
       if (err) {
         res.status(500).json({});
         return;

@@ -11,6 +11,7 @@ const cors = require("./middlewares/cors");
 const connexion = require("./routes/connexion");
 const appartement = require("./routes/appartement");
 const reservation = require("./routes/reservation");
+const userRoutes = require("./routes/user");
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use(cors.handle);
 app.use("/connexion", connexion);
 app.use("/appartement", appartement);
 app.use("/reservation", reservation);
+app.use("/api/auth", userRoutes);
 
 module.exports = app;

@@ -1,9 +1,10 @@
 const express = require("express");
 const routerConnexion = express.Router();
 const controllerConnexion = require("../controllers/connexion");
+const auth = require("../middlewares/auth"); //Middlware d'authentification
 
 // Envoie mail+mdp pour connexion
-routerConnexion.get("/", controllerConnexion.dataConnexion);
+routerConnexion.get("/", auth, controllerConnexion.dataConnexion);
 // Envoie formulaire de message
 routerConnexion.post("/formulaire", controllerConnexion.dataConnexionForm);
 // Envoie formulaire d'inscription

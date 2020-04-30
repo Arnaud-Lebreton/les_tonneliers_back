@@ -5,11 +5,11 @@
 const mongoose = require("mongoose");
 
 const SchemaReservation = mongoose.Schema({
-  nomApp:String,
+  nomApp: String,
   arrivee: String,
   depart: String,
   nbVoyageurs: Number,
-  totalBrut : Number,
+  totalBrut: Number,
   fraisMenage: Number,
   fraisService: Number,
   taxeSejour: Number,
@@ -21,9 +21,9 @@ const SchemaClients = mongoose.Schema(
   {
     nom: String,
     prenom: String,
-    email: String,
+    //email: String,
     tel: String,
-    mdp: String,
+    //mdp: String,
     message: String,
     reservation: [SchemaReservation],
   },
